@@ -9,7 +9,7 @@ const signup = async(data) => {
         if(response.data.token){
             localStorage.setItem("token",response.data.token)
         }
-        return response.data.message;
+        return response.data;
     } catch (error) {
         console.log(error)
         alert("try again later!")

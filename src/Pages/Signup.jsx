@@ -13,9 +13,13 @@ const Signup = () => {
     e.preventDefault();
     let data =  {name, email, password, phone}
     let res = await signup(data);
-    if(res === "Signup Successfully!"){
-      navigate("/")
-    }else if(res === "Email already registered"){
+    if(res.message === "Signup Successfully!"){
+      if(res.isAdmin){
+        return navigate("/admin")
+      }else{
+        navigate("/")
+      }
+    }else if(res.message === "Email already registered"){
       alert("Email already registered try later")
     }else{
       alert("try again later")
