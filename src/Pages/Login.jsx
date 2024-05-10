@@ -3,7 +3,6 @@ import { login } from "../router.js";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     let navigate = useNavigate();
@@ -11,12 +10,16 @@ const Login = () => {
     const handlelogin = async() => {
         let data = {email,password}
        let res = await login(data);
-      if(res === "Invalid Credentials"){
+      if(res.message === "Invalid Credentials"){
         alert("Invalid Credentials")
-      }else if(res === "Invalied Password"){
+      }else if(res.message === "Invalied Password"){
         alert("Invalied Password")
-      }else if(res == "Login Successfully"){
-        navigate("/")
+      }else if(res.message == "Login Successfully"){
+        if(res.isAdmin){
+          return navigate("/admin")
+        }else{
+          navigate("/")
+        }
       }else{
         alert("try again later")
       }
