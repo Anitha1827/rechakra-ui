@@ -7,11 +7,13 @@ const Login = () => {
     const [password, setPassword] = useState("");
     let navigate = useNavigate();
 
-    const handlelogin = async() => {
+    const handlelogin = async(e) => {
+      e.preventDefault();
         let data = {email,password}
        let res = await login(data);
       if(res.message === "Invalid Credentials"){
         alert("Invalid Credentials")
+        
       }else if(res.message === "Invalied Password"){
         alert("Invalied Password")
       }else if(res.message == "Login Successfully"){
@@ -23,12 +25,13 @@ const Login = () => {
       }else{
         alert("try again later")
       }
+
     }
   return (
     <section class="bg-gray-50 dark:bg-gray-900">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
-          href="#"
+         
           class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
           <img
@@ -43,7 +46,7 @@ const Login = () => {
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
               Sign in to your account
             </h1>
-            <form class="space-y-4 md:space-y-6" action="#">
+            <form class="space-y-4 md:space-y-6" onSubmit={handlelogin}>
               <div>
                 <input
                   type="email"
@@ -85,7 +88,7 @@ const Login = () => {
                   </div>
                 </div>
                 <a
-                  href="#"
+                  
                   class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
@@ -93,7 +96,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                onClick={handlelogin}
+                // onClick={handlelogin}
                 class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Sign in
@@ -101,7 +104,6 @@ const Login = () => {
               <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <a
-                  href="#"
                   class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                  Create account
