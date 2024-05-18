@@ -1,8 +1,8 @@
 import axios from "axios"
 
-let api_url = "https://rechakra-api.vercel.app/api";
+// let api_url = "https://rechakra-api.vercel.app/api";
 
-// let api_url = "http://localhost:8000/api"
+let api_url = "http://localhost:8000/api"
 
 //signup function
 const signup = async(data) => {

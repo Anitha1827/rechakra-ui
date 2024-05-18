@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { login } from "../router.js";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -9,8 +15,9 @@ const Login = () => {
 
     const handlelogin = async(e) => {
       e.preventDefault();
-        let data = {email,password}
+        let data = {email,password, usertype}
        let res = await login(data);
+       console.log("res", res)
       if(res.message === "Invalid Credentials"){
         alert("Invalid Credentials")
         
@@ -27,6 +34,13 @@ const Login = () => {
       }
 
     }
+
+    // Dropdown
+    const [usertype, setUsertype] = React.useState("");
+
+    const handleChange = (event) => {
+      setUsertype(event.target.value);
+    };
   return (
     <section class="bg-gray-50 dark:bg-gray-900">
       <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -68,6 +82,24 @@ const Login = () => {
                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>
+
+              <Box sx={{ minWidth: 120 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      User Type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={usertype}
+                      label="Age"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={"user"}>Normal User</MenuItem>
+                      <MenuItem value={"seller"}>Seller</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               <div class="flex items-center justify-between">
                 <div class="flex items-start">
                   <div class="flex items-center h-5">
